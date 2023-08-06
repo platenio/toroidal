@@ -1,0 +1,10 @@
+[cC]odespaces?
+[dD]istros?
+[hH]ugo
+[sS]hortcodes?
+[wW]ebrings?
+[wW]inget
+EPUBs?
+Netlify
+PDFs?
+Shpak

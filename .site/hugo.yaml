@@ -1,0 +1,72 @@
+# Update to your own settings for URL/title
+baseURL:            https://toroidal.platen.io/
+title:              Toroidal
+disablePathToLower: true
+enableGitInfo:      true
+
+contentDir: ../content
+dataDir:    ../data
+
+languages:
+  en:
+    languageName: English
+    weight:       1
+
+markup:
+  _merge: deep
+
+menu:
+  after:
+    - name:   Changelog
+      url:    /changelog
+      pre:    <sl-icon name="bxs-news" library="boxicons"></sl-icon>
+      weight: 10
+    - name:   Source Repository
+      url:    https://github.com/platenio/toroidal
+      pre:    <sl-icon name="bxl-github" library="boxicons"></sl-icon>
+      weight: 20
+  # Disable until announcement post
+  # before:
+  #   - name: Posts
+  #     url: /posts
+  #     weight: 10
+
+module:
+  replacements: >-
+    github.com/platenio/toroidal/module -> ../../module
+  imports:
+    - path: github.com/platenio/toroidal/module
+      mounts:
+        - source: _docs
+          target: content
+        - source: changelog.md
+          target: content/changelog.md
+        - source: _data
+          target: data
+        - source: data
+          target: data
+        - source: archetypes
+          target: archetypes
+        - source: assets
+          target: assets
+        - source: i18n
+          target: i18n
+        - source: layouts
+          target: layouts
+        - source: static
+          target: static
+    - path: github.com/platenio/schematize/hugo
+    - path: github.com/platenio/platen/modules/platen
+
+timeout: "1500s"
+
+params:
+  # description: A documentarian dialect for JSON Schema.
+  # images:
+  #   - /images/logo.svg
+  platen:
+    markup:
+      tabs:
+        use_legacy: false
+      details:
+        use_legacy: false

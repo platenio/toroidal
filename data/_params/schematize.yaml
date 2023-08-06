@@ -1,0 +1,4 @@
+canonical_base_url: https://toroidal.platen.io/
+schema_mapping:
+  map_dot_paths:
+    - schematize.schema_maps.toroidal_config

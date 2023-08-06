@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "chrischinchilla.vale-vscode",
+    "davidanson.vscode-markdownlint",
+    "marvhen.reflow-markdown",
+    "nhoizey.gremlins",
+    "usernamehw.errorlens",
+    "wmaurer.change-case"
+  ]
+}

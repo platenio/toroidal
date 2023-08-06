@@ -1,0 +1,6 @@
+github.com/platenio/platen/modules/platen v0.0.0-20230729184903-3451ed7a46af h1:lJl3fQ9BgxG0G0KqW8dcg0u9oDwt4NUfi2PTYYuHS1w=
+github.com/platenio/platen/modules/platen v0.0.0-20230729184903-3451ed7a46af/go.mod h1:7pfizXCKb4vonp6Og/3zkoy09YYsHip9/hXiT/pc3IM=
+github.com/platenio/schematize/hugo v0.0.0-20230806023017-55137b00d22c h1:30bUC9BCEg2VAOtEylqGH7olzmkXaP93WXbM21Y12zg=
+github.com/platenio/schematize/hugo v0.0.0-20230806023017-55137b00d22c/go.mod h1:aVqfTwtOQlTusP7svxlUjxw80yP9EQVmLdZ7rEytj38=
+github.com/platenio/schematize/hugo v0.0.0-20230806152151-edce9628c2d7 h1:QHU3ijEg8VkeUv4tP8x8Pam2dAKg+3rfhfzk6HiSJeU=
+github.com/platenio/schematize/hugo v0.0.0-20230806152151-edce9628c2d7/go.mod h1:aVqfTwtOQlTusP7svxlUjxw80yP9EQVmLdZ7rEytj38=

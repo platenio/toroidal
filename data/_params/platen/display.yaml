@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://platen.io/modules/platen/config/site/display/settings/schema.json
+table_of_contents:
+  use_legacy: false
+menu:
+  languages_icon:
+    use_legacy: false
+mobile:
+  menu_control:
+    use_legacy: false
+  toc_control:
+    use_legacy: false
+footer:
+  last_edited_on:
+    use_legacy: false
+  edit_this_page:
+    use_legacy: false
+header:
+  title_as_heading: true

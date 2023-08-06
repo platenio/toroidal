@@ -1,0 +1,48 @@
+{{/*
+  This partial returns the nav list for a member of a webring. It expects to
+  receive an instance of scratch with the params already set; the only logic
+  this performs is to arrange and format the information. All retrieval must
+  be done first.
+*/}}
+{{- $Params            := .                         -}}
+
+{{/* Calculated properties */}}
+{{- $IdMap   := partial "toroidal/utils/getNavIDs"           $Params                -}}
+{{- $JsNames := partial "toroidal/utils/scripting/getNames"  $Params                -}}
+{{- $js      := partial "toroidal/utils/scripting/render.js" $Params | htmlUnescape -}}
+{{- $js       = split   $js "\n"                                                    -}}
+{{- $js       = delimit $js "\n    "                                                -}}
+
+{{- if $Params.ForEmbedding }}
+  {{- partial "platen/features/toroidal/menu/embed-header" $Params.WebringName }}
+{{- else }}
+  {{- partial "platen/features/toroidal/menu/list-item" $Params }}
+{{- end }}
+  <ul>
+    <li>
+      <a target="_blank"
+          id="{{ $IdMap.Prev }}"
+          href="{{ $Params.PrevHref }}">Previous</a>
+    </li>
+    <li>
+      <a target="_blank"
+          id="{{ $IdMap.List }}"
+          href="{{ $Params.MemberListHref }}">Member List</a>
+    </li>
+    {{- if $Params.RandomMemberLink }}
+    <li>
+      <a target="_blank"
+          onclick="{{ $JsNames.GoToFunction | safeJS }}"
+          role="button">Random</a>
+    </li>
+    {{- end }}
+    <li>
+      <a target="_blank"
+          id="{{ $IdMap.Next }}"
+          href="{{ $Params.NextHref }}">Next</a>
+    </li>
+  </ul>
+  <script type="text/javascript">
+    {{ $js | safeJS }}
+  </script>
+</li>

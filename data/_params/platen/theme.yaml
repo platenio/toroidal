@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://platen.io/modules/platen/config/site/theme/config/schema.json
+variables:
+  basic_scss:
+    menu-width: "18rem"
+    toc-width: "18rem"

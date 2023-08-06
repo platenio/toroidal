@@ -1,0 +1,5 @@
+schemas.toroidal.content.admin:   true
+schemas.toroidal.content.member:  true
+schemas.toroidal.content.section: true
+schemas.toroidal.site.config:     true
+schemas.toroidal.site.themes:     true

@@ -1,0 +1,26 @@
+module:
+  hugoVersion:
+    extended: true
+    min: 0.111.3
+
+outputFormats:
+  toroidal:
+    mediaType:   application/json
+    baseName:    toroidal
+    isPlainText: true
+
+params:
+  platen:
+    features:
+      toroidal:
+        enabled: true
+        partials:
+          title: platen/features/toroidal/title
+          style: platen/features/toroidal/style.scss
+          menu:  platen/features/toroidal/menu/render
+  toroidal:
+    admin_details:      default
+    random_member_link: true
+    mode:               auto
+    themes:
+      default: true

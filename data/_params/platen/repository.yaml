@@ -1,0 +1,4 @@
+url:          '' # https://github.com/platenio/toroidal
+commit_path:  '' # commit
+edit_path:    '' # edit/main
+content_root: '' # site/content

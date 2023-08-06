@@ -1,0 +1,44 @@
+{{- $IsPlatenSite := partialCached "toroidal/utils/canUsePlatenPartials" "" "check" -}}
+{{/* Only add page info for toroidal members; otherwise, error. */}}
+{{- with page.Params.toroidal_home_page -}}
+{{- $lang := site.LanguageCode               | default site.Language.Lang -}}
+{{- $dir  := site.Language.LanguageDirection | default "ltr"              -}}
+<!DOCTYPE html>
+<html lang="{{ $lang }}" dir="{{ $dir }}">
+  {{- $Info        := partial "toroidal/utils/getPageInfo" page                              -}}
+  {{- $WebringName := $Info.WebringName                                                      -}}
+  {{- $MemberName  := $Info.MemberName                                                       -}}
+  {{- $HeadParams  := dict "context" page "memberName" $MemberName "webringName" $WebringName }}
+  <head>
+  {{- if $IsPlatenSite -}}
+    {{- $ConfigKey      := "platen.features.toroidal.enabled"                        -}}
+    {{- $FeatureEnabled := partialCached "platen/param/getKey" $ConfigKey $ConfigKey -}}
+    {{ if $FeatureEnabled }}
+      {{ partial "toroidal/htmlHeadMember/platen" page }}
+    {{ else }}
+      {{ partial "toroidal/htmlHeadMember/default" $HeadParams }}
+    {{ end }}
+  {{ else }}
+    {{ partial "toroidal/htmlHeadMember/default" $HeadParams }}
+  {{ end }}
+  {{/* The script here allows members using the iframe to auto-size their iframe on load. */}}
+  <script>
+    window.onload = function() {
+      let sizeData = {
+        height: document.body.scrollHeight,
+        width: document.body.scrollWidth
+      }
+      window.parent.postMessage(sizeData, '*');
+    }
+  </script>
+  </head>
+
+  <body dir="{{ $dir }}">
+
+    {{ partial "toroidal/member-entry-page" $Info }}
+
+  </body>
+</html>
+{{- else -}}
+  {{- errorf "Processing Toroidal page without any Toroidal settings in page front matter." -}}
+{{- end }}

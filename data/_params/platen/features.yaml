@@ -1,0 +1,7 @@
+shoelace:
+  always_load: true
+  icons:
+    always_load_libraries:
+      - boxicons
+search:
+  use_legacy: false

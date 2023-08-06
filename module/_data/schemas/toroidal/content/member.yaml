@@ -1,0 +1,176 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema:     https://json-schema.org/draft/2020-12/schema
+$id:         https://toroidal.platen.io/schemas/config/content/member.json
+title:       Member Front Matter
+description: Optional settings for the Toroidal module on a content page.
+schematize:
+  url:         /config/content/member
+  heading:     null
+  description: |
+    Defines settings for a Toroidal webring member using values in the page's front matter. Any
+    settings defined for a member page always overwrite settings defined for the [site][s01] and
+    [webring][s02].
+
+    [s01]: /config/site/settings
+    [s02]: /config/content/section
+
+type: object
+required:
+  - name
+  - description
+  - weight
+  - toroidal_home_page
+properties:
+  name:
+    title:       Member Display Name
+    description: Specifies the display name of the member site.
+    type:        string
+    schematize:
+      weight:      1
+      heading:
+        title: Member Display Name (`name`)
+        attributes:
+          toc_md:  '`name`'
+      description: |
+        Specifies the display name of the member site. This value is used in the member list,
+        the title for the member's iframe page, and the webring's administration page.
+  description:
+    title:       Member Description
+    description: Specifies a short description of the member site.
+    type:        string
+    schematize:
+      weight:      2
+      heading:
+        title: Member Description (`description`)
+        attributes:
+          toc_md:  '`description`'
+      description: |
+        Specifies a short description of the member site. This value is used as the synopsis
+        for the member in the member list and in the the metadata for the member's iframe page.
+  weight:
+    title:       Weight
+    description: Specifies the member's position in the webring.
+    type:        integer
+    minimum:     0
+    schematize:
+      weight:      3
+      heading:
+        title: Weight (`weight`)
+        attributes:
+          toc_md:  '`weight`'
+      description: |
+        Specifies the member's position in the webring. This value is used to determine the
+        order to display the member in the member list and the webring's administration page.
+        It's also used to determine which members of the webring are adjacent, ensuring a
+        deterministic and validly looping webring.
+  toroidal_home_page:
+    title:       Member Home Page
+    description: The URL to the webring member's home page.
+    type:        string
+    schematize:
+      weight:      4
+      heading:
+        title: Member Home Page (`toroidal_home_page`)
+        attributes:
+          toc_md:  '`toroidal_home_page`'
+      description: |
+        The URL to the webring member's home page. If this value isn't specified for a member, Hugo
+        raises an error.
+  toroidal_random_member_link:
+    title:       Display Random Member
+    description: Whether the navigation for a member should include a link to a random member
+    type:        boolean
+    default:     true
+    schematize:
+      weight:      5
+      heading:
+        title: Display Random Member (`toroidal_random_member_link`)
+        attributes:
+          toc_md:  '`toroidal_random_member_link`'
+      description: |
+        Specifies whether the navigation for a member should include a link to a random member of
+        the webring. Set this value to `true` to enable the random member link and `false` to
+        disable it. The default is `true`.
+
+        This setting overrides both [`toroidal.random_member_link`][s01] in the site's
+        configuration and [`toroidal_random_member_link`][s02] in the webring's section page
+        front matter, if set.
+
+        [s01]: /config/site/settings#settings.properties.random_member_link
+        [s02]: /config/content/section#settings.properties.cascade.properties.toroidal_random_member_link
+  toroidal_class:
+    title:       Additional Class
+    description: Specifies one or more classes to append to the generated HTML for the webring
+    type:        string
+    default:     ""
+    schematize:
+      weight:      6
+      heading:
+        title: Additional Classes (`toroidal_class`)
+        attributes:
+          toc_md:  '`toroidal_class`'
+      description: |
+        Specifies one or more classes to append to the generated HTML for the webring. To specify
+        multiple classes, separate each class with a space. You can use this value with the defined
+        themes to style a webring more specifically.
+
+        This setting overrides both [`toroidal.class`][s01] in the site's configuration and
+        [`toroidal_class`][s02] in the webring's section page front matter, if set.
+
+        [s01]: /config/site/settings#settings.properties.class
+        [s02]: /config/content/section#settings.properties.cascade.properties.toroidal_class
+  toroidal_webring_name:
+    title:       Webring Name
+    description: Specifies the name of the webring
+    type:        string
+    schematize:
+      weight:      7
+      title: Webring Name (`toroidal_webring_name`)
+      heading:
+        attributes:
+          toc_md:  '`toroidal_webring_name`'
+      description: |
+        Specifies the name of the webring. If this value isn't specified, the default name `Webring`
+        is used.
+
+        This setting overrides both [`toroidal.webring_name`][s01] in the site's configuration and
+        [`toroidal_webring_name`][s02] in the webring's section page front matter, if set.
+
+        [s01]: /config/site/settings#settings.properties.webring_name
+        [s02]: /config/content/section#settings.properties.cascade.properties.toroidal_webring_name
+  toroidal_member_name:
+    title:       Member Name
+    description: Specifies the name of the member
+    type:        string
+    schematize:
+      weight:      8
+      heading:
+        title: Member Name (`toroidal_member_name`)
+        attributes:
+          toc_md:  '`toroidal_member_name`'
+      description: |
+        Specifies the name of the member. This setting overrides the value used in [`name`][s01].
+        Use this when you want the page name and the member name to be different.
+
+        [s01]: /config/content/member#settings.properties.name
+  toroidal_hide_header:
+    title:       Hide Header on Member Pages
+    description: Specifies whether to hide the h2 header on this member page
+    type:        boolean
+    default:     false
+    schematize:
+      weight:      9
+      heading:
+        title: Hide Header on Member Pages (`toroidal_hide_header`)
+        attributes:
+          toc_md:  '`toroidal_hide_header`'
+      description: |
+        This setting specifies whether to hide the `h2` element on member pages. By default, every
+        member page includes the webring's name as an `h2` at the top of the member's navigation.
+        Set this value to `true` to hide the element on member pages for the page.
+        
+        This setting overrides both [`toroidal.hide_header`][s01] in the site's configuration
+        and [`toroidal_hide_header`][s02] in the webring's section page front matter, if set.
+
+        [s01]: /config/site/settings#settings.properties.hide_header
+        [s02]: /config/content/section#settings.properties.cascade.properties.toroidal_hide_header

@@ -1,0 +1,20 @@
+{
+  // Use consistent tab sizes
+  "editor.tabSize": 2,
+  // Ensure lines do not exceed 100 characters; code lines should not exceed 80.
+  "editor.rulers": [76, 80, 96, 100],
+  "reflowMarkdown.preferredLineLength": 99,
+  // Define and use local schemas for data files:
+  // hide noisy files/folders
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "resources/": true,
+    ".hugo_build.lock": true
+  },
+  "files.eol": "\n"
+}

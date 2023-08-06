@@ -1,0 +1,48 @@
+{{- $Params   := .                                         -}}
+{{- $Context  := default $Params.context  $Params.Context  -}}
+{{- $Entry    := default $Params.entry    $Params.Entry    -}}
+{{- $Position := default $Params.position $Params.Position -}}
+
+{{- with $Entry.page_path -}}
+  {{- with $Entry.partial_path -}}
+    {{- errorf "%s. %s. %s: %v"
+               "Specified both page and partial for webring entry in site menu"
+               "Only one allowed per entry"
+               "Entry definition"
+               $Entry
+    -}}
+  {{- end -}}
+  {{ template "toroidal-platen-menu-entry-from-page" $Entry }}
+{{- else -}}
+  {{- with $Entry.partial_path -}}
+    {{- $partialEntry := merge $Entry (dict "Context" $Context)         -}}
+    {{- $partialEntry := merge $Entry (dict "Position" $Position)       -}}
+    {{ template "toroidal-platen-menu-entry-from-partial" $partialEntry  }}
+  {{- else -}}
+    {{- errorf "Specified Toroidal menu item without 'page_path' or 'partial_path' in %s: %#v" $Position $Entry -}}
+  {{- end  -}}
+{{- end -}}
+
+{{- define "toroidal-platen-menu-entry-from-page" -}}
+  {{- $Entry := . -}}
+  {{- with (site.GetPage $Entry.page_path) -}}
+    {{- $info := partial "toroidal/utils/getPageInfo" .                                        -}}
+    {{- $info  = merge $info (dict "WebringName" (default $info.WebringName $Entry.display_name)) -}}
+
+    {{- if isset $Entry "flatten" -}}
+      {{- $info  = merge $info (dict "MenuFlatten" $Entry.flatten)                   -}}
+      {{- $info  = merge $info (dict "MenuCollapse" (default false $Entry.collapse)) -}}
+    {{- else -}}
+      {{- $info = merge $info (dict "MenuCollapse" (default true $Entry.collapse))   -}}
+    {{- end -}}
+
+    {{ partial "platen/features/toroidal/menu/entry" $info }}
+  {{- else -}}
+    {{- errorf "Couldn't find toroidal webring member page '%s' to include in site menu" $Entry.page_path -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "toroidal-platen-menu-entry-from-partial" -}}
+  {{- $Entry := . -}}
+  {{- partial $Entry.partial_path $Entry -}}
+{{- end -}}

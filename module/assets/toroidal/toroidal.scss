@@ -1,0 +1,28 @@
+{{- $Config := site.Params.toroidal -}}
+{{- if (partialCached "toroidal/utils/canUsePlatenPartials" "" "check") -}}
+  {{- $ConfigKey := "toroidal"                                                -}}
+  {{- $Config     = partialCached "platen/param/getKey" $ConfigKey $ConfigKey -}}
+{{- end -}}
+@import "defaults";
+@import "variables";
+@import "modes/{{ $Config.mode | default "auto" }}";
+@import "normalize";
+@import "utils";
+@import "main";
+@import "fonts";
+
+{{- $themesToImport := slice -}}
+{{- range $theme, $enabled := $Config.themes -}}
+  {{- if eq true $enabled -}}
+    {{- $themesToImport = $themesToImport | append $theme -}}
+  {{- else if $enabled -}}
+    {{- $themesToImport = $themesToImport | append $enabled -}}
+  {{- end -}}
+{{- end -}}
+
+{{ range $theme := $themesToImport }}
+@import "themes/{{ $theme }}";
+{{ end }}
+
+// Custom defined styles
+@import "custom";

@@ -1,0 +1,24 @@
+{{/*
+  Gets the "edit this page" link for the current page. Only works when integrated with Platen.
+  When this partial returns an empty string, the admin page won't show "edit member definition"
+  in the list of links.
+
+  Input: Page context for a member page.
+  Output: String.
+*/}}
+
+{{- $Context    := .  -}}
+{{- $sourceHref := "" -}}
+{{- if (partialCached "toroidal/utils/canUsePlatenPartials" "" "check") -}}
+  {{- $ConfigKey  := "platen.repository"                                              -}}
+  {{- $RepoConfig := partialCached "platen/param/getKey" $ConfigKey $ConfigKey -}}
+  {{- with $RepoConfig.url -}}
+    {{- $Base       := $RepoConfig.url                                            -}}
+    {{- $EditPath   := $RepoConfig.edit_path                                      -}}
+    {{- $ContentDir := site.Params.contentDir | default "content"                 -}}
+    {{- $FilePath   := replace $Context.File.Path "\\" "/"                        -}}
+    {{- $sourceHref  = printf "%s/%s/%s/%s" $Base $EditPath $ContentDir $FilePath -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $sourceHref -}}
